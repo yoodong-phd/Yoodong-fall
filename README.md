@@ -109,3 +109,26 @@ Vitest는 각도 수학, 종횡비 보정, 추적 실패, 정규화, 타이머, 
 - MediaPipe 공식 API 안내: https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/web_js
 - CDC STEADI TUG: https://www.cdc.gov/steadi/media/pdfs/STEADI-Assessment-TUG-508.pdf
 - CDC STEADI 4-Stage: https://www.cdc.gov/steadi/media/pdfs/STEADI-Assessment-4Stage-508.pdf
+
+## PWA 설치 (iOS / Android)
+
+HTTPS 배포 주소에서 처음 접속한 후 설치합니다. Android Chrome에서는 앱 하단의 **앱 설치** 또는 Chrome 메뉴의 **앱 설치 / 홈 화면에 추가**를 사용합니다. iPhone/iPad에서는 **Safari → 공유 → 홈 화면에 추가 → 추가**를 사용합니다. 앱스토어 배포나 개발자 계정은 필요하지 않습니다. 브라우저별 메뉴명과 설치 지원은 OS 버전에 따라 다를 수 있습니다.
+
+- 홈 화면 아이콘, standalone 표시, iOS 터치 아이콘 및 안전 영역 여백을 제공합니다.
+- 프로덕션 빌드가 `manifest.webmanifest`와 버전별 `sw.js`를 생성합니다. 개발 모드에서는 서비스 워커를 등록하지 않습니다.
+- 첫 온라인 접속에서 앱 화면과 JS/CSS를 캐시합니다. 이후 오프라인에서도 앱을 다시 열고 수동 측정·내보내기를 사용할 수 있습니다. 최초 캐시 저장이 완료되어야 하며 OS가 캐시를 삭제하면 다시 온라인 접속해야 합니다.
+- WASM은 실제 요청 후 성공한 응답만 같은 출처 캐시에 저장합니다. 외부 Google AI 모델은 서비스 워커에서 캐시하지 않으므로 **AI 관절 추적의 완전한 오프라인 실행을 보장하지 않습니다.** 처음 모델을 내려받을 때는 인터넷이 필요합니다.
+- 새 버전은 자동으로 화면을 새로고침하지 않습니다. **새 버전 적용** 버튼에서 결과를 내보냈는지 확인한 후 업데이트합니다. 설치·캐시 자체가 측정 데이터 영구 저장을 의미하지 않습니다. 앱 종료·새로고침 전 CSV/JSON 내보내기가 여전히 필요합니다.
+- 카메라 권한은 설치한 앱에서도 허용해야 합니다. 모바일에서 백그라운드로 이동하거나 화면이 잠기면 추적이 중단될 수 있으므로 검사 중에는 화면을 유지하세요.
+- 실제 iOS/Android 기기의 설치·카메라 성능 검증은 별도로 필요합니다. 자동 테스트는 데스크톱 Chromium의 모바일 화면 크기로 수행합니다.
+
+프로덕션 PWA 테스트:
+
+```sh
+npm run build
+npx vite preview --host 127.0.0.1 --port 4173
+# 별도 터미널
+npm run test:pwa
+```
+
+manifest, PNG 아이콘, 서비스 워커 활성화, 오프라인 새로고침, 오프라인 수동 TUG와 모바일 가로 넘침을 검사합니다. Vercel은 `/sw.js`를 재검증하고 manifest·아이콘을 SPA fallback에서 제외하도록 설정했습니다.

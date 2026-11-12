@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/build-sw.mjs",
     "test": "vitest run",
     "predev": "node scripts/copy-wasm.mjs",
     "prebuild": "node scripts/copy-wasm.mjs",
-    "test:e2e": "node tests/browser-smoke.mjs && node tests/browser-errors.mjs"
+    "test:e2e": "node tests/browser-smoke.mjs && node tests/browser-errors.mjs",
+    "test:pwa": "node tests/pwa-smoke.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "0.10.32",

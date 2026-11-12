@@ -1,3 +1,4 @@
+import PWAControls from "./components/PWAControls";
 import { screeningMessage } from "./services/screening";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import CameraView from "./components/CameraView";
@@ -456,6 +457,7 @@ export default function App() {
               onStart={() => setPage("dashboard")}
             />
           )}
+          <PWAControls />
           <footer>
             STABLE <span>AI Fall Assessment System</span>
             <small>Research & Education · 영상 기반 탐색 분석</small>

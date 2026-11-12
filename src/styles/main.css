@@ -1446,3 +1446,48 @@ td:nth-child(2) {
     height: 0;
   }
 }
+.pwa-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  margin-top: 24px;
+}
+.pwa-panel strong {
+  font-size: 12px;
+}
+.pwa-panel p {
+  font-size: 11px;
+  margin: 5px 0 0;
+}
+.pwa-panel > div {
+  flex: 1;
+  min-width: 200px;
+}
+.pwa-panel details {
+  font-size: 12px;
+  max-width: 520px;
+}
+.pwa-panel summary {
+  cursor: pointer;
+  color: var(--teal);
+  padding: 8px;
+}
+.pwa-panel details[open] {
+  flex-basis: 100%;
+}
+.pwa-panel button {
+  font-size: 12px;
+}
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

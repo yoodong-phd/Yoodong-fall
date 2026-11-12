@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "STABLE · AI Fall Assessment",
+  "short_name": "STABLE",
+  "lang": "ko",
+  "description": "균형 및 보행 기능평가를 보조하는 연구·교육용 앱",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f8fa",
+  "theme_color": "#008d83",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
